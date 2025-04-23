@@ -29,3 +29,5 @@ This repository contains data and code scripts for the manuscript *"Estimating a
     -   `see_results multi-samps.R`: code to see model results and create figures
     -   `turtle_fit step1 MR5.R`: code to fit the mark-resight model to the turtle data (step 1)
     -   `turtle_fit step2 counts5.R`: code to fit the population counts model to the turtle data (step 2)
+    -   `turtle_fit_simple LP model.R`: fit two versions of simplified abundance models. Model 1: accounting only for detection probability based on the availablity of marked individuals. Model 2: accounting for detection probability from the availabity of marked individuals and double counts from marked individuals.
+
