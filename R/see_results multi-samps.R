@@ -27,6 +27,33 @@ fig5 <- mcmc_areas(samps1,pars=c("omega","delta","phi.2.","phi.1.","theta"),
   theme(axis.text.y=element_text(face="bold",color="black")) +
   labs(x="Probability") 
 
+
+resu1 <- as.data.frame(t(apply(samps1, 2, function(x)
+  c(Mean=mean(x),quantile(x, probs=c(0.025,0.5,0.975)))
+)))
+resu1 <- resu1[-c(3,5),]
+resu1$par <- rownames(resu1)
+
+ggplot(resu1, aes(x=Mean,xmin=`2.5%`,xmax=`97.5%`,y=par)) +
+  geom_point(size=2.5,color="#548235") +
+  geom_errorbarh(height=.4,linewidth=1,color="#548235") +
+  scale_y_discrete(labels=
+                     c(
+                       expression("Mark identification "),
+                       expression("Double count "),
+                       expression("Availability "),
+                       expression("Nesting ")
+                     )
+  ) +
+  scale_x_continuous(breaks=seq(0,1,0.2),limits=c(0,1)) +
+  labs(x="Probability") +
+  theme_bw(base_size=16) +
+  theme(axis.title.y=element_blank(),axis.text=element_text(color="black"))
+  
+
+
+
+
 # Raw counts --------------------------------------------------------------
 pop.counts <- read.table(file.path("data","PopulationCounts.txt"),h=T)
 pop.counts$data <- factor(pop.counts$data, levels=pop.counts$data)
@@ -40,7 +67,7 @@ figa <-
   geom_bar(stat="identity",position="dodge",width=0.7) +
   scale_y_continuous(breaks=seq(0,2000,by=500)) +
   scale_fill_manual(values=c("darkorange2","royalblue3")) +
-  labs(x="",y="Count data",fill="",title="a)") +
+  labs(x="",y="Counted individuals",fill="",title="a)") +
   theme_classic(base_size=16) +
   theme(legend.position="bottom",
         legend.text=element_text(face="bold",size=14)) +
@@ -184,6 +211,7 @@ fig1 <- grid.arrange(titl1,
                      ncol=1,
                      heights=c(0.3,2)
 )
+
 ggsave("Model5_Step1-estimates.png",fig1,
        dpi=400,height=12,width=20,units="cm")
 
