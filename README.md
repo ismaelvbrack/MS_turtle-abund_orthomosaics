@@ -23,6 +23,7 @@ This repository contains data and code scripts for the manuscript *"Estimating a
 
 -   `R/`: R code scripts to fit the turtle data
 
+    -   `compare_drone-ground.R`: code to create the figures comparing drone orthomosaic counts and visual ground counts
     -   `nimble_counts b(T)theta(.)phi(.)delta(.)omega(.).R`: nimble code for the population counts model (step 2)
     -   `nimble_MR5 theta(.)phi(occ)delta(.)omega(.).R`: nimble code for the mark-resight model (step 1)
     -   `see_results multi-samps.R`: code to see model results and create figures
